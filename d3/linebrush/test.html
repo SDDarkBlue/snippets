@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="d3.min.js"></script>
+<script src="simplify.js"></script>
+<script>
+
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var context_height = 32;
+var context_padding = 95;
+var context_margin = {top: height + context_padding, right: margin.right, bottom: 0, left: margin.left};
+var svg_height = height + context_padding + context_height + margin.top + margin.bottom;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.linear()
+    .range([0, width])
+    .domain([0, 4000]);
+
+var y = d3.scale.linear()
+    .range([height, 0])
+    .domain([0, 15]);
+
+var context_x = d3.scale.linear()
+    .range([0, width])
+    .domain([0, 4000]);
+
+var context_y = d3.scale.linear()
+    .range([context_height, 0])
+    .domain([0, 15]);
+
+var line = d3.svg.line()
+    .x(function(d) {
+        return x(d.x);
+    })
+    .y(function(d) {
+        return y(d.y);
+    });
+
+var context_line = d3.svg.line()
+    .x(function(d) {
+        return context_x(d.x);
+    })
+    .y(function(d) {
+        return context_y(d.y);
+    });
+
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", svg_height);
+
+d3.csv("./data2.csv", function(error, data) {
+  simplified_data = simplify(data, 0.00001, true);
+  console.log(data);
+  console.log(simplified_data);
+
+  var focus = svg.append('g')
+      .attr('class', 'focus')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+  var context = svg.append('g')
+  .attr('class', 'context')
+  .attr('width', width)
+  .attr('height', context_height)
+  .attr('transform', 'translate(' + context_margin.left + ',' + context_margin.top + ')');
+
+  var brush = d3.svg.brush()
+      .x(context_x)
+      .extent([0, 800]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+  var context_xAxis = d3.svg.axis()
+      .scale(context_x)
+      .orient('bottom')
+      .tickSize(-20)
+      .outerTickSize(0)
+      .tickPadding(8);
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+  focus.append("g")
+      .attr("class", "x axis minor")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  focus.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
+
+  var x_major = focus.append('g')
+      .attr('class', 'x axis major')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis);
+
+  //context.append('rect')
+  //    .attr('class', 'context-background')
+  //    .attr('y', 0)
+  //    .attr('width', width)
+  //    .attr('height', context_height);
+
+  context.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + context_height + ')')
+      .call(context_xAxis)
+      .selectAll('text')
+      .attr('x', -4);
+
+  // draw lines
+  focus.append('path')
+      .datum(simplified_data)
+      .attr('class', 'line')
+      .attr('d', line);
+
+  focus.append('path')
+      .datum(data)
+      .attr('class', 'line')
+      .attr('d', line);
+
+  context.append('path')
+      .datum(data)
+      .attr('class', 'line')
+      .attr('d', context_line);
+});
+
+</script>
+
+</body>
+</html>

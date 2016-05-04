@@ -1,0 +1,22 @@
+h1 {
+	font-family: "Georgia";
+}
+.review-list {
+	margin: 0 auto;
+	background-color:#CCCCCC;
+	height:100px;
+	width:100px;
+}
+.map {
+	margin: 0 auto;
+	font-family: "arial";
+	background-color:#eeeeee;
+	height:200px;
+	width:200px;
+}
+
+.map-item {
+	background-color:#2e5eFF;
+	height:40px;
+	width:20px;
+}

@@ -1,0 +1,36 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}My Site{% endblock %}
+{% block content %}
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+	  <div class="navbar-header">
+	  </div>
+	  <div class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="/">Home</a></li>
+	      <li><a href="/">Projects</a></li>
+	      <li>
+		{% if not session.logged_in %}
+		  <a href="{{ url_for('login') }}">log in</a>
+		{% else %}
+		  <a href="{{ url_for('logout') }}">log out</a>
+		{% endif %}
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+	<h1><a href="/">My Site</a></h1>
+
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+      {% block main %}{% endblock %}
+      </div>
+    </div>
+{% endblock %}

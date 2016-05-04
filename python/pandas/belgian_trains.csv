@@ -1,0 +1,5 @@
+train-id;type;start-station;end-station;start-time;end-time
+D472;L;Antwerp Central;Kontich;11h32;12h23
+CZ52-2;P;Puurs;Antwerp Central;12h32;13h52
+I324;IR;Antwerp Central;Brussels South;12h04;12h53
+I423;IR;Antwerp Central;Ghent;12h42;13h52

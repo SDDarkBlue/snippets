@@ -1,0 +1,16 @@
+1. install jasmine.js
+
+        npm install jasmine
+
+2. install karma.js
+
+        npm install karma --save-dev
+        npm install karma-jasmine karma-chrome-launcher --save-dev
+
+3. Initialize karma
+
+        ./node_modules/karma/bin/karma init my.conf.js
+
+4. After answering karma's questions, start karma with
+
+        ./node_modules/karma/bin/karma start my.conf.js

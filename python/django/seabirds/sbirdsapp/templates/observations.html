@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<h1>Test</h1>
+<p>Yes! Got it!</p>
+<!-- add the jQuery script -->
+<link rel="stylesheet" href="{% static 'lib/jqwidgets/jqwidgets/styles/jqx.base.css' %}" type="text/css" />
+<script type="text/javascript" src="{% static 'lib/jqwidgets/scripts/jquery-1.10.2.min.js' %}"></script>	
+<!-- add the jQWidgets framework -->
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxcore.js' %}"></script>
+<!-- add one or more widgets -->
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxdata.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxbuttons.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxscrollbar.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxmenu.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxlistbox.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxdropdownlist.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.selection.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.columnsresize.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.filter.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.sort.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.pager.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.grouping.js' %}"></script> 
+<script type="text/javascript" src="{% static 'lib/jqwidgets/jqwidgets/jqxgrid.edit.js' %}"></script> 
+
+<div id="jqxgrid">
+</div>
+<script type="text/javascript">
+    // prepare the data
+var data = {{observations|safe}};
+var source =
+{
+    url: "http://localhost:8000/admin/sbirdsapp/observation/get",
+    datatype: "json"
+};
+var dataAdapter = new $.jqx.dataAdapter(source, {
+	/*
+    formatData: function (somedata) {
+	return "{}";
+    },
+    */
+    loadComplete: function () {
+        console.log("loading completed");
+	var records = dataAdapter.records;
+	console.log("records: " + records);
+    },
+    loadError: function (jqXHR, status, error) {console.log("I got an error: " + error);}
+});
+dataAdapter.dataBind();
+$("#jqxgrid").jqxGrid(
+{
+    source: dataAdapter,
+    width: 1000,
+    editable: true,
+    columns: [
+        { text: 'id', datafield: 'pk', width: 100 },
+        { text: 'Time', datafield: 'time', width: 100 },
+	{ text: 'Speces', datafield: 'species', width: 100 },
+	{ text: 'Count', datafield: 'count', width: 100 },
+	{ text: 'Age', datafield: 'age', width: 100 },
+	{ text: 'Plumage', datafield: 'plumage', width: 100 },
+	{ text: 'Stratum', datafield: 'stratum', width: 100 },
+	{ text: 'Behaviour flyway', datafield: 'behaviour flyway', width: 150 },
+	{ text: 'Association behaviour', datafield: 'association behaviour', width: 150 }
+    ]
+});
+
+</script>

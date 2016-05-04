@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+    <div id="testdiv"></div>
+    <script>
+	console.log("create the svg");
+	var svg = d3.select("#testdiv").append("svg")
+	  .attr("width", 200)
+	  .attr("height", 200);
+
+        console.log("create the circles");
+	var circle = svg.selectAll("circle").data([4, 8, 15]).enter().append("circle");
+
+	console.log("set circles parameters");
+	circle.attr("cx", function(d, i) {
+		return (i * 50) + 25;
+	    })
+	    .attr("cy", 100)
+	    .attr("r", function(d) {
+		return d;
+	    });
+
+        svg.selectAll("circle").data([6, 3, 42])
+        .transition()
+        .duration(1000)
+        .attr("r", function(d) {return d;});
+    </script>
+</body>

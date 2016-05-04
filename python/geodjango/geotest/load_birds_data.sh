@@ -1,0 +1,4 @@
+#grep -v "device_info_serial" ~/Projects/LW-006-Zendernetwerk/exploring/bird_tracking_devices.csv | cut -d "," -f 1,2,3,4,5,7,9,10,11,16,17 | psql -c "COPY testapp_bird(id, ring_code, color_ring_code, species, sex, tracking_start_date_time, colony_latitude, colony_longitude, remarks, bird_name, colony_name) FROM stdin WITH delimiter as ','" -d geodj_test
+#psql -c "UPDATE testapp_bird set colony_location = ST_SetSRID(ST_MakePoint(colony_longitude, colony_latitude), 4326);" -d geodj_test
+grep -v "device_info_serial" ~/Projects/LW-006-Zendernetwerk/exploring/bird_tracking_head.csv | cut -d "," -f 1,2,3,4 | psql -c "COPY testapp_log(bird_id, timestamp, lat, lon) FROM stdin WITH delimiter as ','" -d geodj_test
+psql -c "UPDATE testapp_log set point = ST_SetSRID(ST_MakePoint(lon, lat), 4326);" -d geodj_test

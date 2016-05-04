@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><kml xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd" xmlns="http://www.opengis.net/kml/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kml="http://www.opengis.net/kml/2.2">
+<Document>
+
+<name>testtrack1</name>
+<Style id="lineStyle"><LineStyle>
+<color>99ffac59</color>
+<width>6</width>
+</LineStyle>
+</Style>
+<Folder>
+
+<name>Track 2014-12-10 18:03</name>
+<open>1</open>
+
+<Folder>
+<name>Segment 1</name>
+<open>1</open>
+<TimeSpan>
+<begin>2014-12-10T17:03:45Z</begin>
+<end>2014-12-10T17:10:38Z</end>
+</TimeSpan>
+<Placemark>
+<name>Path</name>
+<styleUrl>#lineStyle</styleUrl>
+<LineString>
+<tessellate>0</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>4.34767232,51.18280496 4.34602214,51.18211053 4.34512961,51.1813594 4.34484322,51.1807209 4.34424272,51.18057528 4.34266427,51.18047027 4.34146221,51.17992711 4.33993113,51.17937196 4.33860334,51.17929909 4.33805239,51.17858136 4.33799474,51.17770106 4.33843276,51.17659305 4.33787044,51.17578319 4.3371736,51.175524 4.33687253,51.1747208 4.33690132,51.17365308 4.33583262,51.17302252 </coordinates>
+</LineString>
+</Placemark>
+</Folder>
+</Folder>
+</Document></kml>

@@ -1,0 +1,31 @@
+#accordeonWrapper {
+    margin: 10px;
+}
+
+#accordeonWrapper h3 a {
+    text-indent: -9999px;
+    height: 150px;
+    width: 50px;
+    float: left;
+}
+
+#accordeonWrapper .red {
+    background: #c00 url(images/red.png) no-repeat;
+}
+
+#accordeonWrapper .green {
+    background: #0c0 url(images/green.png) no-repeat;
+}
+
+#accordeonWrapper .yellow {
+    background: #00c url(images/yellow.png) no-repeat;
+}
+
+#accordeonWrapper div.box {
+    float: left;
+    height: 150px;
+    width: 150px;
+    border: 0;
+    margin: 0;
+    background-image: none;
+}

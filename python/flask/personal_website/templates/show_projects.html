@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block main %}
+  {% if session.logged_in %}
+  <h2>Add a new project:</h2>
+    <div class="container">
+      <div class="col-lg-10">
+	<form action="{{ url_for('add_entry') }}" method=post class=add-entry fole="form">
+	  <div class="form-group">
+	    <label for="name">Name:</label>
+	    <input type=text class="form-control" id="name" name=name>
+	  </div>
+	  <div class="form-group">
+	    <label for="description">Description:</label>
+	    <textarea class="form-control" rows="3" id="description" name=description></textarea>
+	  </div>
+	  <div class="form-group">
+	    <label for="name">Url:</label>
+	    <input type=text class="form-control" id="url" name=url>
+	  </div>
+	  <button type="submit" class="btn btn-default">Add</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+  <ul class=entries>
+  {% for project in projects %}
+    <li><h2>{{ project.name}}</h2>{{ project.description|safe }}<br>{{ project.url|safe }}
+  {% else %}
+    <li><em>Unbelievable. No projects here so far</em>
+  {% endfor %}
+  </ul>
+  <h2>My recent blogposts</h2>
+  <ul class=entries>
+  {% for blogpost in blogposts %}
+    <li><h3>{{ blogpost.title }}</h3>{{ blogpost.content|safe }}</li>
+  {% else %}
+    <p>Could not fetch recent blogposts...</p>
+  {% endfor %}
+  </ul>
+{% endblock %}

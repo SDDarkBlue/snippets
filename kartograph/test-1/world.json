@@ -1,0 +1,12 @@
+{
+    "layers": {
+	"countries": {
+	    "src": "ne_50m_admin_0_countries.shp",
+	    "attributes": ["iso_a3", "name"],
+	    "stroke-width": "4.5px"
+	},
+	"background": {
+	    "special": "sea"
+	}
+    }
+}

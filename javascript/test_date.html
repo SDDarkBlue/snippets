@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<script>
+var c = [new Date("2013-01-02"), new Date("2013-03-12"), new Date("2013-04-27"), new Date("2013-03-12")]
+var d = fetchDates(c);
+
+function fetchDates(d) {
+    outarr = new Array();
+    for(var i = 0; i < d.length; i++) {
+	outarr.push(d[i].getUTCDate())
+    };
+    return outarr;
+};
+console.log(d);
+</script>
+

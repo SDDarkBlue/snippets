@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Three spheres</title>
+        <script src="http://d3js.org/d3.v2.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <div ng-app="sphere1" ng-controller="SphereController as sp">
+          <svg> </svg>
+          {{sp.drawCircles()}}
+          <ul>
+              <li ng-repeat="circle in sp.circles">
+                  <a href ng-click="sp.setCurrent(circle.nr)">Circle {{circle.nr}} </a>
+              </li>
+          </ul>
+
+          <div ng-repeat="circle in sp.circles">
+              <div ng-show="sp.isCurrent(circle.nr)">
+              <h2>Circle {{sp.currentCircle}}</h2>
+              Radius: 
+              <input type="number" min=0 ng-model="circle.radius">
+          </div>
+          </div>
+      </div>
+    </body>
+</html>
